@@ -17,3 +17,67 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+function createCarousel() {
+
+  let imgIndex = 0;
+
+  // Create
+  let carousel = document.createElement('div');
+  let leftButton = document.createElement('div');
+  let img1 = document.createElement('img');
+  let img2 = document.createElement('img');
+  let img3 = document.createElement('img');
+  let img4 = document.createElement('img');
+  let rightButton = document.createElement('div');
+
+  let imgArr = [img1, img2, img3, img4];
+  
+  // Style
+  carousel.classList.add('carousel');
+  leftButton.classList.add('left-button');
+  rightButton.classList.add('right-button');
+
+  // Structure
+  carousel.appendChild(leftButton);
+  carousel.appendChild(img1);
+  carousel.appendChild(img2);
+  carousel.appendChild(img3);
+  carousel.appendChild(img4);
+  carousel.appendChild(rightButton);
+
+  // Content
+  leftButton.textContent = ' < ';
+  rightButton.textContent = ' > ';
+  img1.src = './assets/carousel/mountains.jpeg';
+  img2.src = './assets/carousel/computer.jpeg';
+  img3.src = './assets/carousel/trees.jpeg';
+  img4.src = './assets/carousel/turntable.jpeg';
+
+  // Display first image by default
+  img1.style.display = 'block';
+
+  // Create event listner for left click
+  leftButton.addEventListener('click', event => {
+    imgArr[imgIndex].style.display = 'none';
+    imgIndex -= 1;
+    if(imgIndex < 0) { imgIndex = 3 }
+    imgArr[imgIndex].style.display = 'block';
+  })
+
+  // Create event listener for right click
+  rightButton.addEventListener('click', event => {
+    imgArr[imgIndex].style.display = 'none';
+    imgIndex += 1;
+    if(imgIndex > 3) { imgIndex = 0 }
+    imgArr[imgIndex].style.display = 'block';
+  })
+
+
+  // Return
+  return carousel;
+}
+
+let carouselContainer = document.querySelector('.carousel-container');
+
+carouselContainer.appendChild(createCarousel());
